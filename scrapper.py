@@ -3,7 +3,7 @@ from bs4 import BeautifulSoup as bs
 from urllib.parse import urljoin
 
 # URL of the web page you want to extract
-url = "https://duruthemes.com/demo/html/pwe/multipage/portfolio.html"
+url = "https://duruthemes.com/demo/html/pwe/multipage/index.html"
 
 # initialize a session
 session = requests.Session()
@@ -48,29 +48,29 @@ print("Total CSS files in the page:", len(css_files))
 #         print(css_file, file=f)
 
 # Make HTML page
-with open("portfolio.html", "w") as f:
+with open("index.html", "w") as f:
         print(html.decode(), file=f)
 
 # # Make JS Files
-# for jsFile in script_files:
-#     try:
-#         if(jsFile.split("/")[-1].split("?")[0] == "js"):
-#             continue
-#         print("Generated: " + jsFile.split("/")[-1].split("?")[0])
-#         jsFileContent = session.get(jsFile).content
-#         with open("js/" + jsFile.split("/")[-1].split("?")[0], "w") as f:
-#             print(jsFileContent.decode(), file=f)
-#     except:
-#         print("Failed!")
+for jsFile in script_files:
+    try:
+        if(jsFile.split("/")[-1].split("?")[0] == "js"):
+            continue
+        print("Generated: " + jsFile.split("/")[-1].split("?")[0])
+        jsFileContent = session.get(jsFile).content
+        with open("js/" + jsFile.split("/")[-1].split("?")[0], "w") as f:
+            print(jsFileContent.decode(), file=f)
+    except:
+        print("Failed!")
 
-# # # Make CSS Files
-# for cssFile in css_files:
-#     try:
-#         if(cssFile.split("/")[-1].split("?")[0] == "png"):
-#             continue
-#         print("Generated: " + cssFile.split("/")[-1].split("?")[0])
-#         cssFileContent = session.get(cssFile).content
-#         with open("css/" + cssFile.split("/")[-1].split("?")[0], "w") as f:
-#             print(cssFileContent.decode(), file=f)
-#     except:
-#         print("Failed!")
+# # Make CSS Files
+for cssFile in css_files:
+    try:
+        if(cssFile.split("/")[-1].split("?")[0] == "png"):
+            continue
+        print("Generated: " + cssFile.split("/")[-1].split("?")[0])
+        cssFileContent = session.get(cssFile).content
+        with open("css/" + cssFile.split("/")[-1].split("?")[0], "w") as f:
+            print(cssFileContent.decode(), file=f)
+    except:
+        print("Failed!")
